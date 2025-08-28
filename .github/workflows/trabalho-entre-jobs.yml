@@ -37,7 +37,7 @@ jobs:
         run: ls -lha && ls ./strigus/
 
       - name: Acessa arquivos mensagem
-        run: mv strigus/mensagem.txt && rm -rf ./strigus
+        run: mv strigus/mensagem.txt . && rm -rf ./strigus
 
       - name: Ver o conteudo do diretorio
         run: ls -lha
