@@ -42,6 +42,5 @@ jobs:
       - name: Ver o conteudo do diretorio
         run: ls -lha
 
-    steps:
       - name: Acessa arquivo mensagem
         run: cat mensagem.txt
