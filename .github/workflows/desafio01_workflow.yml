@@ -5,6 +5,7 @@ on:
     inputs:
       docker_image:
         description: "Imagem criada no PICK 2024"
+        type: string
         required: true
         default: "geforce8400gsd/giropops-senhas:1.0"
 
@@ -15,8 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step 1 - Docker Pull
+        run: |
+            echo "docker_image='${{ inputs.docker_image }}'"
+            if [ -z "${{ inputs.docker_image }}" ]; then
+              echo "ERRO: input 'docker_image' está vazio."
+              exit 1
+            fi
+
+      - name: Step 2 - visualizando imagem docker pullrizada
         run: docker pull "${{ inputs.docker_image }}"
 
       - name: Step 2 - visualizando imagem docker pullrizada
         run: docker image ls
+
 
