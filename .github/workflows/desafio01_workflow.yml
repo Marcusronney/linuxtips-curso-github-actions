@@ -9,9 +9,6 @@ on:
         default: "geforce8400gsd/giropops-senhas:1.0"
 
 
-  push:
-    branches:
-      - Desafio01
 
 jobs:
   job_1:
