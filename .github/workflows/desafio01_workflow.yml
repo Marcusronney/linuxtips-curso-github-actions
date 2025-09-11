@@ -9,24 +9,35 @@ on:
         required: true
         default: "geforce8400gsd/giropops-senhas:1.0"
 
-
-
 jobs:
   job_1:
     runs-on: ubuntu-latest
     steps:
-      - name: Step 1 - Docker Pull
+      - name: Step 1 - Validar input
         run: |
-            echo "docker_image='${{ inputs.docker_image }}'"
-            if [ -z "${{ inputs.docker_image }}" ]; then
-              echo "ERRO: input 'docker_image' está vazio."
-              exit 1
-            fi
+          echo "docker_image='${{ inputs.docker_image }}'"
+          if [ -z "${{ inputs.docker_image }}" ]; then
+            echo "ERRO: input 'docker_image' está vazio."
+            exit 1
+          fi
 
-      - name: Step 2 - visualizando imagem docker pullrizada
+      - name: Step 2 - Docker Pull
         run: docker pull "${{ inputs.docker_image }}"
 
-      - name: Step 2 - visualizando imagem docker pullrizada
+      - name: Step 2.1 - Listar imagem
         run: docker image ls
 
+      - name: Analyze for critical and high CVEs
+        id: docker-scout-cves
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ inputs.docker_image }}
+          sarif-file: sarif.output.json
+          summary: true
 
+      - name: Upload SARIF result
+        id: upload-sarif
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: sarif.output.json
