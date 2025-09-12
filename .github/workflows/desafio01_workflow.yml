@@ -1,43 +1,48 @@
-name: Desafio01 - Workflow 
+name: Desafio01 - Workflow # Nome do Workflow
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: #Executa o workflow manualmente
     inputs:
       docker_image:
         description: "Imagem criada no PICK 2024"
         type: string
-        required: true
-        default: "geforce8400gsd/giropops-senhas:1.0"
+        required: true #define o nome padrão
+        default: "geforce8400gsd/giropops-senhas:1.0" #Imagem 
+
+permissions: #permissoes de leitura do contaúdo e escrita para o sarif.
+  contents: read
+  actions: read
+  security-events: write
 
 jobs:
   job_1:
     runs-on: ubuntu-latest
     steps:
       - name: Step 1 - Validar input
-        run: |
+        run: | #exibindo saida da imagem
           echo "docker_image='${{ inputs.docker_image }}'"
           if [ -z "${{ inputs.docker_image }}" ]; then
             echo "ERRO: input 'docker_image' está vazio."
             exit 1
           fi
 
-      - name: Step 2 - Docker Pull
+      - name: Step 2 - Docker Pull # Baixando a imagem
         run: docker pull "${{ inputs.docker_image }}"
 
-      - name: Step 2.1 - Listar imagem
-        run: docker image ls
+      - name: Step 2.1 - Listar imagem local # listando a imagem na VM
+        run: docker image ls "${{ inputs.docker_image }}"
 
-      - name: Analyze for critical and high CVEs
+      - name: Step 3 - Docker Scout - # analise de vulnerabilidades da imagem
         id: docker-scout-cves
         uses: docker/scout-action@v1
         with:
-          command: cves
-          image: ${{ inputs.docker_image }}
-          sarif-file: sarif.output.json
-          summary: true
+          command: cves #analisa as cves
+          image: ${{ inputs.docker_image }} #imagem de input
+          sarif-file: sarif.output.json #saída do json formatado para o sarif
+          summary: true #log resumido
 
-      - name: Upload SARIF result
-        id: upload-sarif
+      - name: Step 3.1 - Envia para o Sarif scannear # https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/uploading-a-sarif-file-to-github
+        id: upload-sarif #envia para o security code
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: sarif.output.json
