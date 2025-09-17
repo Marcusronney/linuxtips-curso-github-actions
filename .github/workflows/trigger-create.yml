@@ -1,0 +1,12 @@
+name: Testando a regra de protection rule
+
+on:
+  create
+
+jobs:
+  rint-branch-or-tag-creation:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Aviso sobre criação de branch ou tag
+        run: Uma nova tag ou branch foi criada no repositório
