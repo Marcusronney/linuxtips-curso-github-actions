@@ -1,0 +1,12 @@
+name: trigger gollum
+
+on:
+  gollum
+
+jobs:
+  job-deployment:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Printa gollum
+        run: echo "Alguma alteração foi realizada na wiki"
