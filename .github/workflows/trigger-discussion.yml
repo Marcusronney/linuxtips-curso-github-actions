@@ -1,0 +1,13 @@
+name: rigger discussion
+
+on:
+  discussion:
+  types: [created, edited, answered]
+
+jobs:
+  job-discussion:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Printa discussion
+        run: echo "job triggado por um discussion criada/alterada/respondida"
