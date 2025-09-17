@@ -2,7 +2,7 @@ name: rigger discussion
 
 on:
   discussion:
-  types: [created, edited, answered]
+    types: [created, edited, answered]
 
 jobs:
   job-discussion:
