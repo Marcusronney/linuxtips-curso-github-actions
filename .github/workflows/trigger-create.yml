@@ -9,4 +9,4 @@ jobs:
     steps:
 
       - name: Aviso sobre criação de branch ou tag
-        run: Uma nova tag ou branch foi criada no repositório
+        run: echo "Uma nova tag ou branch foi criada no repositório"
