@@ -9,4 +9,4 @@ jobs:
     steps:
 
       - name: Printa Deployment
-        run: job triggado por um deployment externo
+        run: echo "job triggado por um deployment externo"
