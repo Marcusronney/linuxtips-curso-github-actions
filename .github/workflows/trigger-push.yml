@@ -1,0 +1,17 @@
+name: Criando tigger push
+
+on:
+  push:
+    branches:
+      -'main'
+      - 'staging'
+    paths:
+    - '**.tf'
+
+jobs:
+  job-push:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Printa push
+        run: echo "Um push em seus arquivos de Terraform foi feito em uma branchs"
