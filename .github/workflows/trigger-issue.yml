@@ -1,0 +1,13 @@
+name: riando nosso tigger issue
+
+on:
+  issues:
+    types: [opened, edited, milestoned]
+
+jobs:
+  job-issue:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Printa issue
+        run: echo "ma issue foi aberta/editada/deletada"
