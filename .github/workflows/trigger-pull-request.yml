@@ -1,13 +1,13 @@
 name: Criando pull request
 
 on:
-  issues:
-    types: [opened, edited, milestoned]
+  pull_request:
+    types: [opened, edited, deleted, reopened]
     branches:
-      -'main/**'
+      -'main'
 
 jobs:
-  job-issupull request:
+  job-pull-request:
     runs-on: ubuntu-latest
     steps:
 
