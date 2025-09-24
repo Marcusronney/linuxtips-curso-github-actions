@@ -1,0 +1,15 @@
+name: Criando pull request
+
+on:
+  issues:
+    types: [opened, edited, milestoned]
+    branches:
+      -'main/**'
+
+jobs:
+  job-issupull request:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Printa pull request
+        run: echo "Um pull request foi aberto/editado/deletado/reaberto com destino na branch main"
