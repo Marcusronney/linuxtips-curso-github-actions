@@ -1,9 +1,9 @@
-name: Criando tigger push
+name: Criando trigger push
 
 on:
   push:
     branches:
-      -'main'
+      - 'main'
       - 'staging'
     paths:
     - '**.tf'
