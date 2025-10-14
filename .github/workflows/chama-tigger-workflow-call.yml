@@ -1,7 +1,7 @@
 name: Chama Workflow compartilhado
 
 on:
-  workflow_call:
+  workflow_dispacth:
     inputs:
       nome-do-curso-enviado:
         required: true
