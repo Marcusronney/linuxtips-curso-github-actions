@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
+        env:
+          PROPRIETARIO: ${{ github.repository_owner}}
+          SHA_COMMIT: ${{ github.sha}}"
         run: |
-          echo "Proprietario do Repositório ${{ github.repository_owner }}"
+          echo "Proprietario do Repositório $Proprietario"
           echo "SHA do Commit: ${{ github.sha}}"
